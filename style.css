@@ -75,6 +75,16 @@ form {
                 position: relative;
                 z-index: 2;
                 opacity: 0.7;
+                img {
+                    height: 300px;
+                }
+                .fire {
+                    top: -20px;
+                    left: 16px;
+
+                    position: absolute;
+                    transition: all 0.5s;
+                }
             }
             .trashthing:nth-child(1) {
                 left: 125px;
@@ -106,23 +116,71 @@ form {
             }
             .buttonCont {
                 .dropTrash {
-                    width: 20px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    width: 26px;
+                    height: 26px;
+                    margin-left: 5px;
+                    border: 1px solid #939191;
+                    border-radius: 5px;
+                    font-size: 16px;
+                    background-image: linear-gradient(
+                        135deg,
+                        #fedce1 0%,
+                        #7073fe 100%
+                    );
+                    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2),
+                        0 4px 6px rgba(0, 0, 0, 0.2);
+                    background-repeat: no-repeat;
                 }
                 .backTrash {
-                    width: 20px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    width: 26px;
+                    height: 26px;
+                    margin-left: 5px;
+                    border: 1px solid #939191;
+                    border-radius: 5px;
+                    font-size: 16px;
+                    background-image: linear-gradient(
+                        135deg,
+                        #fedce1 0%,
+                        #7073fe 100%
+                    );
+                    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2),
+                        0 4px 6px rgba(0, 0, 0, 0.2);
+                    background-repeat: no-repeat;
                 }
                 .remove {
-                    width: 20px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    width: 35px;
+                    height: 26px;
+                    margin-left: 5px;
+                    border: 1px solid #939191;
+                    border-radius: 5px;
+                    font-size: 16px;
+                    background-image: linear-gradient(
+                        135deg,
+                        #fedce1 0%,
+                        #7073fe 100%
+                    );
+                    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2),
+                        0 4px 6px rgba(0, 0, 0, 0.2);
+                    background-repeat: no-repeat;
                 }
             }
         }
         .buttonCont {
             position: absolute;
-            right: -80px;
+            right: -100px;
 
             display: flex;
-            width: 75px;
-            gap: 5px;
+
+            gap: 2px;
         }
     }
 }
@@ -135,13 +193,17 @@ form {
     align-items: center;
 }
 .trashthing {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
     position: relative;
     width: 300px;
     height: 50px;
     margin-left: 5px;
     border: 1px solid #939191;
     border-radius: 5px;
-    font-size: 16px;
+    font-size: 30px;
     background-image: linear-gradient(135deg, #040a26 0%, #bab7b3 100%);
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2), 0 4px 6px rgba(0, 0, 0, 0.2);
     background-repeat: no-repeat;
@@ -201,4 +263,9 @@ form {
             color: #00435b;
         }
     }
+}
+
+.remove:hover ~ .buttonCont .backTrash {
+    transform: scale(1.5);
+    /* Додайте інші анімації чи властивості тут */
 }

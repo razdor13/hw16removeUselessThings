@@ -5,6 +5,7 @@ const removeTrash = document.querySelector(".remove");
 const dropTresh = document.querySelector(".dropTrash");
 const backTrash = document.querySelector(".backTrash");
 const containerForDumpster = document.querySelector(".containerForDumpster");
+const fireTresh = document.querySelector(".fire");
 console.log(containerForTrash.childNodes);
 function doAddTresh(input) {
     const htmlStructure = `
@@ -15,6 +16,7 @@ function doAddTresh(input) {
     `;
     containerForTrash.innerHTML += htmlStructure;
 }
+
 function handleTreshRemoval() {
     document.querySelectorAll(".close").forEach((btn, i) => {
         btn.addEventListener("click", (event) => {
@@ -22,6 +24,13 @@ function handleTreshRemoval() {
         });
     });
 }
+imput.addEventListener("keydown", function (event) {
+    if (event.key === "Enter" && !(containerForTrash.childElementCount === 4)) {
+        const userInput = imput.value;
+        doAddTresh(userInput);
+        handleTreshRemoval();
+    }
+});
 imputAdd.addEventListener("mousedown", () => {
     const userInput = imput.value;
     doAddTresh(userInput);
@@ -78,4 +87,12 @@ removeTrash.addEventListener("click", () => {
         );
         containerForDumpster.removeChild(containerForDumpster.firstChild);
     }
+    fireTresh.style.display = "block";
+    setTimeout(() => {
+        fireTresh.style.transform = "scale(0.001)";
+    }, 500);
+    setTimeout(() => {
+        fireTresh.style.transform = "scale(1)";
+        fireTresh.style.display = "none";
+    }, 1000);
 });
