@@ -32,9 +32,11 @@ imput.addEventListener("keydown", function (event) {
     }
 });
 imputAdd.addEventListener("mousedown", () => {
-    const userInput = imput.value;
-    doAddTresh(userInput);
-    handleTreshRemoval();
+    if (!(containerForTrash.childElementCount === 4)) {
+        const userInput = imput.value;
+        doAddTresh(userInput);
+        handleTreshRemoval();
+    }
 });
 
 dropTresh.addEventListener("click", () => {
