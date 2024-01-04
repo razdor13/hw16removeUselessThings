@@ -1,11 +1,9 @@
 const imput = document.querySelector(".imput");
 const imputAdd = document.querySelector(".imputAdd");
 const containerForTrash = document.querySelector(".blockNotdoThis");
-const removeTrash = document.querySelector(".remove");
-const dropTresh = document.querySelector(".dropTrash");
-const backTrash = document.querySelector(".backTrash");
 const containerForDumpster = document.querySelector(".containerForDumpster");
 const fireTresh = document.querySelector(".fire");
+const buttoncont = document.querySelector(".buttonCont");
 console.log(containerForTrash.childNodes);
 function doAddTresh(input) {
     const htmlStructure = `
@@ -17,84 +15,82 @@ function doAddTresh(input) {
     containerForTrash.innerHTML += htmlStructure;
 }
 
-function handleTreshRemoval() {
-    document.querySelectorAll(".close").forEach((btn, i) => {
-        btn.addEventListener("click", (event) => {
-            event.target.parentElement.remove();
-        });
-    });
-}
-imput.addEventListener("keydown", function (event) {
-    if (event.key === "Enter" && !(containerForTrash.childElementCount === 4)) {
-        const userInput = imput.value;
-        doAddTresh(userInput);
-        handleTreshRemoval();
+containerForTrash.addEventListener("click", (e) => {
+    if (e.target.classList.contains("close")) {
+        e.target.parentElement.remove();
     }
 });
+
+// imput.addEventListener("keydown", function (event) {
+//     if (event.key === "Enter" && !(containerForTrash.childElementCount === 4)) {
+//         const userInput = imput.value;
+//         doAddTresh(userInput);
+//     }
+// });
+
 imputAdd.addEventListener("mousedown", () => {
-    if (!(containerForTrash.childElementCount === 4)) {
+    if (
+        !(containerForTrash.childElementCount === 4) &&
+        !containerForDumpster.children.length > 0
+    ) {
         const userInput = imput.value;
-        doAddTresh(userInput);
-        handleTreshRemoval();
-    }
-});
-
-dropTresh.addEventListener("click", () => {
-    const containerForTrash = document.querySelector(".blockNotdoThis");
-
-    // if (containerForTrash.childElementCount === 4) {
-    //     const containerForDumpster = document.querySelector(
-    //         ".containerForDumpster"
-    //     );
-    //     while (containerForTrash.firstChild) {
-    //         containerForDumpster.appendChild(containerForTrash.firstChild);
-    //     }
-    // }
-    if (containerForTrash.childElementCount === 4) {
-        const containerForTrash = document.querySelector(".blockNotdoThis");
-        function recursionDropAnimation() {
-            if (containerForTrash.firstChild) {
-                containerForDumpster.appendChild(containerForTrash.firstChild);
-                animationWithTimeOut();
-            }
-        }
-        recursionDropAnimation();
-        function animationWithTimeOut() {
-            setTimeout(() => {
-                recursionDropAnimation();
-            }, 70);
+        if (userInput.trim()) {
+            doAddTresh(userInput);
+        } else {
+            alert("Маша сказала щось ввести!");
         }
     } else {
-        return;
+        alert("спочатку позбудься того що в смітнику");
     }
 });
 
-backTrash.addEventListener("click", () => {
-    const containerForDumpster = document.querySelector(
-        ".containerForDumpster"
-    );
-    const containerForTrash = document.querySelector(".blockNotdoThis");
-    while (containerForDumpster.firstChild) {
-        containerForTrash.appendChild(containerForDumpster.firstChild);
+buttoncont.addEventListener("click", (e) => {
+    if (e.target.classList.contains("dropTrash")) {
+        const containerForTrash = document.querySelector(".blockNotdoThis");
+        if (containerForTrash.childElementCount === 4) {
+            const containerForTrash = document.querySelector(".blockNotdoThis");
+            function recursionDropAnimation() {
+                if (containerForTrash.firstChild) {
+                    containerForDumpster.appendChild(
+                        containerForTrash.firstChild
+                    );
+                    animationWithTimeOut();
+                }
+            }
+            recursionDropAnimation();
+            function animationWithTimeOut() {
+                setTimeout(() => {
+                    recursionDropAnimation();
+                }, 70);
+            }
+        }
     }
-});
-
-removeTrash.addEventListener("click", () => {
-    const containerForDumpster = document.querySelector(
-        ".containerForDumpster"
-    );
-    while (containerForDumpster.firstChild) {
+    if (e.target.classList.contains("backTrash")) {
         const containerForDumpster = document.querySelector(
             ".containerForDumpster"
         );
-        containerForDumpster.removeChild(containerForDumpster.firstChild);
+        const containerForTrash = document.querySelector(".blockNotdoThis");
+        while (containerForDumpster.firstChild) {
+            containerForTrash.appendChild(containerForDumpster.firstChild);
+        }
     }
-    fireTresh.style.display = "block";
-    setTimeout(() => {
-        fireTresh.style.transform = "scale(0.001)";
-    }, 500);
-    setTimeout(() => {
-        fireTresh.style.transform = "scale(1)";
-        fireTresh.style.display = "none";
-    }, 1000);
+    if (e.target.classList.contains("remove")) {
+        const containerForDumpster = document.querySelector(
+            ".containerForDumpster"
+        );
+        while (containerForDumpster.firstChild) {
+            const containerForDumpster = document.querySelector(
+                ".containerForDumpster"
+            );
+            containerForDumpster.removeChild(containerForDumpster.firstChild);
+        }
+        fireTresh.style.display = "block";
+        setTimeout(() => {
+            fireTresh.style.transform = "scale(0.001)";
+        }, 500);
+        setTimeout(() => {
+            fireTresh.style.transform = "scale(1)";
+            fireTresh.style.display = "none";
+        }, 1000);
+    }
 });
